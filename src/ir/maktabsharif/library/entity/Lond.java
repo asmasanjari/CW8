@@ -24,6 +24,9 @@ public class Lond {
         this.borrowDate = borrowDate;
     }
 
+    public LocalDateTime getReturnDate() {
+        return returnDate;
+    }
 
     public void setReturnDate(LocalDateTime returnDate) {
         this.returnDate = returnDate;

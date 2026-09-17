@@ -10,14 +10,19 @@ import java.util.Map;
 
 public class InMemoryMemberRepository implements MemberRepository {
     private final Map<Integer, Member> members = new HashMap();
-    private int idd = 0;
+
+
+    private int idd = 1;
 
     @Override
     public void save(Member member) {
-        member.setId(idd);
-        members.put(idd, member);
-        idd++;
 
+        if (member.getId() == 0) {
+            member.setId(idd);
+            idd++;
+        }
+
+        members.put(member.getId(), member);
     }
 
     public void delete(Member member) {
