@@ -1,3 +1,5 @@
+package ir.maktabsharif.library.entity;
+
 public class Book {
 
     private int id;

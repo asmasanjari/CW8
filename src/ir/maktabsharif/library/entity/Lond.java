@@ -1,12 +1,32 @@
+package ir.maktabsharif.library.entity;
+
+import java.time.LocalDateTime;
+
 public class Lond {
     private int id;
     private Member memberId;
     private Book bookId;
+    private LocalDateTime borrowDate;
+    private LocalDateTime returnDate;
 
-    public Lond(int id, Member memberId, Book bookId) {
+    public Lond(int id, Member memberId, Book bookId, LocalDateTime borrowDate) {
         this.id = id;
         this.memberId = memberId;
         this.bookId = bookId;
+        this.borrowDate = borrowDate;
+    }
+
+    public LocalDateTime getBorrowDate() {
+        return borrowDate;
+    }
+
+    public void setBorrowDate(LocalDateTime borrowDate) {
+        this.borrowDate = borrowDate;
+    }
+
+
+    public void setReturnDate(LocalDateTime returnDate) {
+        this.returnDate = returnDate;
     }
 
     public int getId() {

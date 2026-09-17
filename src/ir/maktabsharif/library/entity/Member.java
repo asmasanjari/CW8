@@ -1,3 +1,5 @@
+package ir.maktabsharif.library.entity;
+
 public class Member {
     private int id;
     private String name;
