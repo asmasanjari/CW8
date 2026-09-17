@@ -1,16 +1,18 @@
-CREATE DATABASE library;
-\connect library;
+CREATE
+DATABASE library;
+\connect
+library;
 
 CREATE TABLE members
 (
-    id    integer PRIMARY KEY,
+    id    serial PRIMARY KEY,
     name  VARCHAR(50),
     email VARCHAR(100)
 
 );
 CREATE TABLE book
 (
-    id     integer PRIMARY KEY,
+    id     serial PRIMARY KEY,
     name   VARCHAR(50),
     author VARCHAR(50)
 
@@ -18,7 +20,7 @@ CREATE TABLE book
 );
 CREATE TABLE lond
 (
-    id         integer primary key,
+    id         serial primary key,
     memberId   integer references members (id),
     bookID     integer references book (id),
     borrowDate DATE,
