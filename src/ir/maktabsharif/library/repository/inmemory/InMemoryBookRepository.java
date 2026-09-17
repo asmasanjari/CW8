@@ -10,11 +10,12 @@ import java.util.Map;
 
 public class InMemoryBookRepository implements BookRepository {
     private final Map<Integer, Book> books = new HashMap<>();
+    private static int baseId = 1;
 
     @Override
     public void save(Book book) {
         if (book.getId() == 0)
-            book.setId(books.size() + 1);
+            book.setId(baseId++);
 
         books.put(book.getId(), book);
     }
