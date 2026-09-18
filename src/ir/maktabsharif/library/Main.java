@@ -3,9 +3,11 @@ package ir.maktabsharif.library;
 import ir.maktabsharif.library.entity.Book;
 import ir.maktabsharif.library.entity.Lond;
 import ir.maktabsharif.library.entity.Member;
+import ir.maktabsharif.library.repository.BookRepository;
 import ir.maktabsharif.library.repository.inmemory.InMemoryBookRepository;
 import ir.maktabsharif.library.repository.inmemory.InMemoryLondRepository;
 import ir.maktabsharif.library.repository.inmemory.InMemoryMemberRepository;
+import ir.maktabsharif.library.repository.jdbc.JdbcBookRepository;
 import ir.maktabsharif.library.service.BookService;
 import ir.maktabsharif.library.service.LondService;
 import ir.maktabsharif.library.service.MemberService;
@@ -23,16 +25,17 @@ public class Main {
 
         InMemoryLondRepository inMemoryLondRepository =
                 new InMemoryLondRepository();
-
+        JdbcBookRepository jdbcBookRepository = new JdbcBookRepository();
 
         MemberService serviceM =
                 new MemberService(inMemoryMemberRepository);
 
+
         BookService serviceB =
-                new BookService(inMemoryBookRepository);
+                new BookService(jdbcBookRepository);
 
         LondService serviceL =
-                new LondService(inMemoryLondRepository);
+                new LondService(inMemoryLondRepository, inMemoryMemberRepository, inMemoryBookRepository);
 
 
         System.out.println("Members:");
@@ -130,8 +133,8 @@ public class Main {
         Book book = serviceB.findAll().get(0);
 
         serviceL.lendBook(
-                member,
-                book
+                member.getId(),
+                book.getId()
         );
 
         System.out.println("book lent");

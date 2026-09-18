@@ -1,7 +1,7 @@
+DROP DATABASE IF EXISTS library;
 CREATE
-DATABASE library;
-\connect
-library;
+    DATABASE library;
+\connect library;
 
 CREATE TABLE members
 (
