@@ -1,19 +1,32 @@
 package ir.maktabsharif.library.service;
 
 import ir.maktabsharif.library.entity.Member;
+import ir.maktabsharif.library.exception.LibraryFullException;
+import ir.maktabsharif.library.exception.RegisterException;
 import ir.maktabsharif.library.repository.MemberRepository;
 
 import java.util.List;
 
 public class MemberService {
     private final MemberRepository memberRepository;
-
+    int size=100;
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
 
     }
 
-    public void addMember(String name, String email) {
+    public void register(String name, String email) throws RuntimeException {
+        if (name == null) {
+            throw new RegisterException("name can not be null");
+//            System.out.println("name can not be null");
+//            return;
+        }
+        if (email == null) {
+            throw new RuntimeException("email can not be null");
+        }
+        if (size==100){
+            throw new LibraryFullException("library is full");
+        }
         Member m1 = new Member(0, name, email);
         memberRepository.save(m1);
     }

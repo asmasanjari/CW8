@@ -6,6 +6,7 @@ import ir.maktabsharif.library.repository.DbConaction;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +15,14 @@ public class JdbcBookRepository implements BookRepository {
     @Override
     public void save(Book book) {
         Connection connection = DbConaction.getConnection();
+
+        Statement statement = null;
         try {
-            Statement statement = connection.createStatement();
+            statement = connection.createStatement();
             statement.execute("INSERT INTO book( name , author) values( '" + book.getName() + "','" + book.getAuthor() + "')");
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InMemoryMemberRepository implements MemberRepository {
+public class  InMemoryMemberRepository implements MemberRepository {
     private final Map<Integer, Member> members = new HashMap();
 
 
