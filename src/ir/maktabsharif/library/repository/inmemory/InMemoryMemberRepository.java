@@ -39,4 +39,9 @@ public class  InMemoryMemberRepository implements MemberRepository {
     public List<Member> findAll() {
         return new ArrayList<>(members.values());
     }
+
+    @Override
+    public int count() {
+        return members.size();
+    }
 }

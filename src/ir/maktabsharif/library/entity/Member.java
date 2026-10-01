@@ -5,6 +5,7 @@ public class Member {
     private String name;
     private String email;
 
+
     public  Member(int id,String name ,String email){
         this.email=email;
         this.name=name;

@@ -4,6 +4,7 @@ import ir.maktabsharif.library.entity.Member;
 import ir.maktabsharif.library.exception.LibraryFullException;
 import ir.maktabsharif.library.exception.RegisterException;
 import ir.maktabsharif.library.repository.MemberRepository;
+import ir.maktabsharif.library.repository.jdbc.JdbcMembersRepository;
 
 import java.util.List;
 
@@ -15,19 +16,19 @@ public class MemberService {
 
     }
 
-    public void register(String name, String email) throws RuntimeException {
+    public void register(String name, String email) throws IllegalArgumentException {
         if (name == null) {
-            throw new RegisterException("name can not be null");
+            throw new IllegalArgumentException("name can not be null");
 //            System.out.println("name can not be null");
 //            return;
         }
         if (email == null) {
-            throw new RuntimeException("email can not be null");
+            throw new IllegalArgumentException("email can not be null");
         }
-        if (size==100){
+        if (memberRepository.count() >=100){
             throw new LibraryFullException("library is full");
         }
-        Member m1 = new Member(0, name, email);
+        Member m1 = new Member(10, name, email);
         memberRepository.save(m1);
     }
 

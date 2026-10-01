@@ -10,11 +10,13 @@ import ir.maktabsharif.library.repository.inmemory.InMemoryBookRepository;
 import ir.maktabsharif.library.repository.inmemory.InMemoryLondRepository;
 import ir.maktabsharif.library.repository.inmemory.InMemoryMemberRepository;
 import ir.maktabsharif.library.repository.jdbc.JdbcBookRepository;
+import ir.maktabsharif.library.repository.jdbc.JdbcMembersRepository;
 import ir.maktabsharif.library.service.BookService;
 import ir.maktabsharif.library.service.LondService;
 import ir.maktabsharif.library.service.MemberService;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main() {
@@ -25,16 +27,16 @@ public class Main {
 
         InMemoryLondRepository inMemoryLondRepository = new InMemoryLondRepository();
         JdbcBookRepository jdbcBookRepository = new JdbcBookRepository();
-
-        MemberService memberService = new MemberService(inMemoryMemberRepository);
+        JdbcMembersRepository jdbcMembersRepository = new JdbcMembersRepository();
+        MemberService memberService = new MemberService(jdbcMembersRepository);
 
 
         BookService serviceB = new BookService(jdbcBookRepository);
 
         LondService serviceL = new LondService(inMemoryLondRepository, inMemoryMemberRepository, inMemoryBookRepository);
 
-
-        System.out.println("Members:");
+        jdbcBookRepository.save(new Book(10,"e","a"));
+       /* System.out.println("Members:");
         try {
             memberService.register(null, "ali@gmail.com");
 
@@ -42,21 +44,21 @@ public class Main {
 
             System.out.println(e.getMessage());
         } catch (Exception e) {
+*/
 
-
-        }
+       // }
 /*try {
 
     memberService.register("hassan", "hassan@gmail.com");
 }*/
 
 
-        List<Member> members = memberService.findAll();
+      /*  List<Member> members = memberService.findAll();
 
         for (Member member : members) {
             System.out.println(member.getId() + " " + member.getName() + " " + member.getEmail());
         }
-
+*/
 /*
         System.out.println();
         System.out.println("Update member:");
@@ -161,6 +163,23 @@ public class Main {
             System.out.println(member1.getId() + " " + member1.getName() + " " + member1.getEmail());
         }
         */
-
+        IO.println("> ");
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            int command = scanner.nextInt();
+            if (command == 1) {
+                String name = scanner.next();
+                String email = scanner.next();
+               try {
+                   memberService.register(name, email);
+               } catch (Exception e){
+                   System.out.println(e.getMessage());
+                   System.out.println("try again");
+               }
+            }
+            if (command == 2) {
+                break;
+            }
+        }
     }
 }

@@ -13,4 +13,5 @@ public interface MemberRepository {
     Member findById(int id);
 
     List<Member> findAll();
+     int count();
 }

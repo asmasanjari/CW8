@@ -14,11 +14,11 @@ import java.util.List;
 public class JdbcBookRepository implements BookRepository {
     @Override
     public void save(Book book) {
-        Connection connection = DbConaction.getConnection();
 
-        Statement statement = null;
+
         try {
-            statement = connection.createStatement();
+            Connection connection = DbConaction.getConnection();
+            Statement statement = connection.createStatement();
             statement.execute("INSERT INTO book( name , author) values( '" + book.getName() + "','" + book.getAuthor() + "')");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -27,8 +27,8 @@ public class JdbcBookRepository implements BookRepository {
 
     @Override
     public Book findById(int id) {
-        Connection connection = DbConaction.getConnection();
         try {
+            Connection connection = DbConaction.getConnection();
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("select * from  book where id=" + id);
             if (result.next()) {
@@ -52,9 +52,9 @@ public class JdbcBookRepository implements BookRepository {
 
     @Override
     public List<Book> findAll() {
-        Connection connection = DbConaction.getConnection();
         ArrayList<Book> books = new ArrayList<>();
         try {
+            Connection connection = DbConaction.getConnection();
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("select * from  book");
             while (result.next()) {
@@ -71,4 +71,5 @@ public class JdbcBookRepository implements BookRepository {
         }
         return books;
     }
+
 }
